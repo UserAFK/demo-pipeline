@@ -4,14 +4,17 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                script {
-                    // Start a Docker container with the specified image
-                    docker.image('alpine:latest').inside {
-                        // Run any commands inside the Docker container
-                        sh 'echo "Hello, world!"'
-                        sh 'ls -l'
-                    }
-                }
+                // Print a message to indicate the build stage
+                echo 'Building...'
+            }
+        }
+        stage('Test') {
+            steps {
+                // Print a message to indicate the test stage
+                echo 'Testing...'
+                // Execute a simple shell command to simulate a test
+                sh 'echo "Testing in progress..."'
+                // You can add your actual test commands here
             }
         }
     }
