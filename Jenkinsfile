@@ -1,10 +1,17 @@
 pipeline {
-    agent { docker { image 'node:20.11.0-alpine3.19' } }
+    agent any
+
     stages {
-        stage('build') {
+        stage('Build') {
             steps {
-                sh 'echo "Hello World"'
-                sh 'node --version'
+                script {
+                    // Start a Docker container with the specified image
+                    docker.image('alpine:latest').inside {
+                        // Run any commands inside the Docker container
+                        sh 'echo "Hello, world!"'
+                        sh 'ls -l'
+                    }
+                }
             }
         }
     }
