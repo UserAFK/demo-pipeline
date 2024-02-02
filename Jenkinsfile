@@ -2,19 +2,20 @@ pipeline {
     agent any
 
     stages {
-        stage('Build') {
+        stage('Build Docker Image') {
             steps {
-                // Print a message to indicate the build stage
-                echo 'Building...'
+                // Build the Docker image
+                script {
+                    docker.build("userafk/storeimage")
+                }
             }
         }
-        stage('Test') {
+        stage('Run Docker Container') {
             steps {
-                // Print a message to indicate the test stage
-                echo 'Testing...'
-                // Execute a simple shell command to simulate a test
-                sh 'echo "Testing in progress..."'
-                // You can add your actual test commands here
+                // Run a Docker container using the built image
+                script {
+                    docker.image("userafk/storeimage").run()
+                }
             }
         }
     }
